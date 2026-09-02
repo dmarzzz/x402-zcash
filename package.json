@@ -63,8 +63,9 @@
     "test:watch": "vitest",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "pnpm format:check && pnpm typecheck && pnpm test && pnpm build",
-    "prepack": "pnpm check"
+    "check": "npm run format:check && npm run typecheck && npm test && npm run build",
+    "prepare": "npm run build",
+    "prepack": "npm run check"
   },
   "peerDependencies": {
     "@x402/core": "^2.24.0"

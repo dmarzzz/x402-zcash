@@ -35,6 +35,12 @@ sign/extract (no broadcast)
 pnpm add @zakura/x402-zcash @x402/core @x402/fetch
 ```
 
+Until the package is published to npm, install the tagged GitHub release directly:
+
+```bash
+pnpm add github:dmarzzz/x402-zcash#v0.1.0 @x402/core @x402/fetch
+```
+
 Node.js 20 or newer is required. The first release targets x402 v2 and `@x402/core` 2.24 or newer.
 
 ## Client
