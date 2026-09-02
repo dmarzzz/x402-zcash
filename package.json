@@ -1,0 +1,84 @@
+{
+  "name": "@zakura/x402-zcash",
+  "version": "0.1.0",
+  "description": "x402 exact-payment support for ZEC using Zallet PCZTs and Zakura settlement",
+  "keywords": [
+    "x402",
+    "zcash",
+    "zec",
+    "zakura",
+    "zallet",
+    "payments"
+  ],
+  "license": "MIT",
+  "author": "Zakura Contributors",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmarzzz/x402-zcash.git"
+  },
+  "homepage": "https://github.com/dmarzzz/x402-zcash#readme",
+  "bugs": "https://github.com/dmarzzz/x402-zcash/issues",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./exact/client": {
+      "types": "./dist/exact/client/index.d.ts",
+      "import": "./dist/exact/client/index.js",
+      "require": "./dist/exact/client/index.cjs"
+    },
+    "./exact/server": {
+      "types": "./dist/exact/server/index.d.ts",
+      "import": "./dist/exact/server/index.js",
+      "require": "./dist/exact/server/index.cjs"
+    },
+    "./exact/facilitator": {
+      "types": "./dist/exact/facilitator/index.d.ts",
+      "import": "./dist/exact/facilitator/index.js",
+      "require": "./dist/exact/facilitator/index.cjs"
+    },
+    "./rpc": {
+      "types": "./dist/rpc/index.d.ts",
+      "import": "./dist/rpc/index.js",
+      "require": "./dist/rpc/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "specs"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "pnpm format:check && pnpm typecheck && pnpm test && pnpm build",
+    "prepack": "pnpm check"
+  },
+  "peerDependencies": {
+    "@x402/core": "^2.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@x402/core": "^2.24.0",
+    "prettier": "^3.6.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.15.0"
+}
