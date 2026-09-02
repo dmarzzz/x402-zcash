@@ -1,8 +1,8 @@
-# @zakura/x402-zcash
+# x402-zcash
 
 ZEC payments for [x402 v2](https://github.com/x402-foundation/x402), packaged as ordinary `@x402/core` client, resource-server, and facilitator mechanisms.
 
-The client asks [Zallet](https://github.com/zcash/zallet) to build a signed but unbroadcast transaction through its PCZT RPCs. The facilitator broadcasts it through [Zakura](https://github.com/zakura-core/zakura), verifies the exact recipient and amount, and only then lets the protected handler run.
+This is an independent community integration, not an official Zakura or Zcash package. The client asks [Zallet](https://github.com/zcash/zallet) to build a signed but unbroadcast transaction through its PCZT RPCs. The facilitator can broadcast it through a [Zakura](https://github.com/zakura-core/zakura) node, verify the exact recipient and amount, and only then let the protected handler run.
 
 ```text
 x402 client                 x402 facilitator                 merchant
@@ -32,13 +32,13 @@ sign/extract (no broadcast)
 ## Install
 
 ```bash
-pnpm add @zakura/x402-zcash @x402/core @x402/fetch
+pnpm add x402-zcash @x402/core @x402/fetch
 ```
 
 Until the package is published to npm, install the tagged GitHub release directly:
 
 ```bash
-pnpm add github:dmarzzz/x402-zcash#v0.1.0 @x402/core @x402/fetch
+pnpm add github:dmarzzz/x402-zcash#v0.1.1 @x402/core @x402/fetch
 ```
 
 Node.js 20 or newer is required. The first release targets x402 v2 and `@x402/core` 2.24 or newer.
@@ -50,12 +50,8 @@ Zallet must be synced, unlocked when necessary, and configured with `external.br
 ```ts
 import { x402Client } from "@x402/core/client";
 import { wrapFetchWithPayment } from "@x402/fetch";
-import { registerExactZcashScheme } from "@zakura/x402-zcash/exact/client";
-import {
-  ZalletPcztSigner,
-  ZalletRpcClient,
-  ZCASH_NETWORKS,
-} from "@zakura/x402-zcash";
+import { registerExactZcashScheme } from "x402-zcash/exact/client";
+import { ZalletPcztSigner, ZalletRpcClient, ZCASH_NETWORKS } from "x402-zcash";
 
 const wallet = new ZalletRpcClient({
   url: process.env.ZALLET_RPC_URL!,
@@ -101,8 +97,8 @@ Register the server mechanism with any x402 HTTP adapter. Prices expressed as an
 
 ```ts
 import { HTTPFacilitatorClient, x402ResourceServer } from "@x402/core/server";
-import { registerExactZcashScheme } from "@zakura/x402-zcash/exact/server";
-import { ZCASH_NETWORKS } from "@zakura/x402-zcash";
+import { registerExactZcashScheme } from "x402-zcash/exact/server";
+import { ZCASH_NETWORKS } from "x402-zcash";
 
 const facilitator = new HTTPFacilitatorClient({
   url: "https://facilitator.example.com",
@@ -134,13 +130,13 @@ The scheme adds a fresh `extra.paymentId` to each unpaid 402 response and marks 
 
 ```ts
 import { x402Facilitator } from "@x402/core/facilitator";
-import { registerExactZcashScheme } from "@zakura/x402-zcash/exact/facilitator";
+import { registerExactZcashScheme } from "x402-zcash/exact/facilitator";
 import {
   ZakuraRpcClient,
   ZalletPaymentObserver,
   ZalletRpcClient,
   ZCASH_NETWORKS,
-} from "@zakura/x402-zcash";
+} from "x402-zcash";
 
 const zakura = new ZakuraRpcClient({
   url: process.env.ZAKURA_RPC_URL!,
@@ -211,7 +207,7 @@ If Zakura accepted the transaction but confirmation cannot be observed before `m
 Other wallets can integrate by implementing `ZcashTransactionSigner`:
 
 ```ts
-import type { ZcashTransactionSigner } from "@zakura/x402-zcash";
+import type { ZcashTransactionSigner } from "x402-zcash";
 
 const signer: ZcashTransactionSigner = {
   async createTransaction(request) {

@@ -1,7 +1,7 @@
 {
-  "name": "@zakura/x402-zcash",
-  "version": "0.1.0",
-  "description": "x402 exact-payment support for ZEC using Zallet PCZTs and Zakura settlement",
+  "name": "x402-zcash",
+  "version": "0.1.1",
+  "description": "Independent x402 exact-payment support for ZEC using Zallet PCZTs and Zakura-compatible settlement",
   "keywords": [
     "x402",
     "zcash",
@@ -11,7 +11,7 @@
     "payments"
   ],
   "license": "MIT",
-  "author": "Zakura Contributors",
+  "author": "x402-zcash contributors",
   "repository": {
     "type": "git",
     "url": "https://github.com/dmarzzz/x402-zcash.git"
